@@ -1,6 +1,6 @@
 from mangum import Mangum
 from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import FileResponse
+from fastapi.responses import StreamingResponse
 from PIL import Image
 import numpy as np
 import io
@@ -34,6 +34,6 @@ async def invert_image(file: UploadFile = File(...)):
     inverted_image.save(byte_io, 'JPEG')
     byte_io.seek(0)
 
-    return FileResponse(byte_io, headers={"Content-Disposition": "attachment; filename=inverted_image.jpg"})
+    return StreamingResponse(byte_io, media_type="image/jpeg", headers={"Content-Disposition": "attachment; filename=inverted_image.jpg"})
 
 handler = Mangum(app)
