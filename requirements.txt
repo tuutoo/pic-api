@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+mangum
 Pillow
 numpy
 python-multipart
